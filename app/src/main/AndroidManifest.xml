@@ -15,7 +15,7 @@
         android:theme="@style/Theme.MyFoodApp"
         tools:targetApi="31">
         <activity
-            android:name=".view.MainActivity"
+            android:name="com.example.myfoodapp.presentation.view.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

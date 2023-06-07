@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_44">44dp</dimen> // размер view
+    <dimen name="margin_10">10dp</dimen> //
+    <dimen name="space_10">10dp</dimen> //paddin
+    <dimen name="text_10">10sp</dimen>
+
+    <dimen name="radius_10">10dp</dimen>//Corner
+    <dimen name="elevations">2dp</dimen>//Тень
+
+
+</resources>
