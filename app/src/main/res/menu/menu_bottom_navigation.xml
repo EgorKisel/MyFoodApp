@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/actionMainScreen"
+        android:icon="@drawable/ic_main_screen"
+        android:title="@string/main"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/actionSearchScreen"
+        android:icon="@drawable/ic_search_screen"
+        android:title="@string/search"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/actionBasketScreen"
+        android:icon="@drawable/ic_basket_screen"
+        android:title="@string/basket"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/actionAccountScreen"
+        android:icon="@drawable/ic_account_screen"
+        android:title="@string/account"
+        app:showAsAction="ifRoom" />
+
+</menu>

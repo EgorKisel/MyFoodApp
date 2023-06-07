@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyFoodApp</string>
+    <string name="main">Главная</string>
+    <string name="search">Поиск</string>
+    <string name="basket">Корзина</string>
+    <string name="account">Аккаунт</string>
+    <string name="saint_petersburg">Санкт-Петербург</string>
+</resources>
