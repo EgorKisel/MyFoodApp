@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModel
 import com.example.myfoodapp.data.model.CategoriesDTO
 import com.example.myfoodapp.data.repoimpl.RepositoryCategoryImpl
 import com.example.myfoodapp.domain.RepositoryCategory
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainViewModel(
     private val liveData: MutableLiveData<AppState> = MutableLiveData(),
@@ -26,7 +29,6 @@ class MainViewModel(
         override fun onFail() {
             liveData.postValue(AppState.Error(Throwable()))
         }
-
     }
 
     interface Callback {

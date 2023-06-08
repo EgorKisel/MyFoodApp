@@ -2,8 +2,8 @@ package com.example.myfoodapp.presentation.dishes
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myfoodapp.R
 import com.example.myfoodapp.common.KEY_BUNDLE_TITLE
@@ -13,13 +13,13 @@ import com.example.myfoodapp.data.model.DisheResponse
 import com.example.myfoodapp.databinding.FragmentMenuListBinding
 import com.example.myfoodapp.presentation.dishes.adapter.AdapterDishes
 import com.example.myfoodapp.presentation.dishes.adapter.OnDishesClickListener
-import com.example.myfoodapp.presentation.product.DialogFragmentProduct
+import com.example.myfoodapp.presentation.product.ProguctDialog
 import com.google.android.material.chip.Chip
 
 class FragmentMenuList : Fragment(R.layout.fragment_menu_list), OnDishesClickListener {
 
-    private var _binding: FragmentMenuListBinding? = null
-    private val binding: FragmentMenuListBinding get() = _binding!!
+    private lateinit var binding: FragmentMenuListBinding
+
     private val viewModel: DishesViewModel by lazy {
         ViewModelProvider(this)[DishesViewModel::class.java]
     }
@@ -27,20 +27,28 @@ class FragmentMenuList : Fragment(R.layout.fragment_menu_list), OnDishesClickLis
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentMenuListBinding.bind(view)
-        val observer = Observer<DishesViewModel.DishesAppState> { renderData(it) }
-        val dishesObserver = Observer<List<DisheResponse>> { dishes ->
-            adapter.setData(dishes)
-            adapter.mSetOnClickListener(this)
-        }
+
+        binding = FragmentMenuListBinding.bind(view)
+
+
         binding.recyclerDishes.adapter = adapter
+
+        //Не красиво
         viewModel.apply {
-            getLiveData().observe(viewLifecycleOwner, observer)
-            getDishesLiveData().observe(viewLifecycleOwner, dishesObserver)
+            getLiveData().observe(viewLifecycleOwner) { renderData(it) }
+            getDishesLiveData().observe(viewLifecycleOwner) { dishes ->
+                adapter.setData(dishes)
+                adapter.mSetOnClickListener(this@FragmentMenuList)
+            }
+            //Переименвоать
             getDishes2()
         }
+
+        //Удалить
         val categoryId = arguments?.getInt(KEY_CATEGORIES_BUNDLE)
+
         val categoryName = arguments?.getString(KEY_BUNDLE_TITLE)
+
         binding.tvDishes.text = categoryName.toString()
 
         dishesFiltering()
@@ -52,28 +60,28 @@ class FragmentMenuList : Fragment(R.layout.fragment_menu_list), OnDishesClickLis
             val selectedTag = selectedChip?.text?.toString()
             if (selectedTag != null) {
                 viewModel.onChipSelected(selectedTag)
-                viewModel.filterDishesByTag()
             }
         }
     }
 
     private fun renderData(appState: DishesViewModel.DishesAppState) {
-        when(appState) {
+        when (appState) {
             is DishesViewModel.DishesAppState.Error -> {}
             DishesViewModel.DishesAppState.Loading -> {}
             is DishesViewModel.DishesAppState.Success -> {
                 adapter.setData(appState.dishes.dishes)
             }
+            DishesViewModel.DishesAppState.EmptyList -> {
+                Toast.makeText(requireContext(), getString(R.string.empty_list), Toast.LENGTH_LONG)
+                    .show()
+            }
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
     companion object {
-        @JvmStatic
+
+        const val PRODUCT_DIALOG_TAG = "PRODUCT_DIALOG_TAG"
+
         fun newInstance(bundle: Bundle): FragmentMenuList {
             val fragment = FragmentMenuList()
             fragment.arguments = bundle
@@ -85,8 +93,8 @@ class FragmentMenuList : Fragment(R.layout.fragment_menu_list), OnDishesClickLis
         val args = Bundle().apply {
             putParcelable(KEY_DISH_BUNDLE, dishes)
         }
-        val dialogFragment = DialogFragmentProduct()
-        dialogFragment.show(parentFragmentManager, "dialog_tag")
+        val dialogFragment = ProguctDialog()
+        dialogFragment.show(parentFragmentManager, PRODUCT_DIALOG_TAG) // Константы
         dialogFragment.arguments = args
     }
 }

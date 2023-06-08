@@ -13,10 +13,12 @@ class DishesViewModel(
     private val repository: RepositoryDishes = RepositoryDishesImpl(),
     private val selectedTagLiveData: MutableLiveData<String> = MutableLiveData(),
     private val dishesLiveData: MutableLiveData<List<DisheResponse>> = MutableLiveData(),
-    private val allDishes: MutableList<DisheResponse> = mutableListOf()
+    private val allDishes: MutableList<DisheResponse> = mutableListOf(),
 ) : ViewModel() {
 
+    //Не вызываем
     fun getSelectedTagLiveData(): LiveData<String> = selectedTagLiveData
+
     fun getDishesLiveData(): LiveData<List<DisheResponse>> = dishesLiveData
 
     fun getDishes2() {
@@ -35,28 +37,40 @@ class DishesViewModel(
     }
 
     fun onChipSelected(tag: String) {
-        selectedTagLiveData.value = tag
+        //selectedTagLiveData.value = tag
+        filterDishesByTag(tag)
     }
-    fun filterDishesByTag() {
-        val selectedTag = selectedTagLiveData.value
 
+    private fun filterDishesByTag(tag: String) {
+        val selectedTag = tag
+        //Констанкат
         if (selectedTag == "Всё меню") {
-            // Если выбран чип "Всё меню", показываем все блюда без фильтрации
+            if (allDishes.isEmpty()) {
+                liveData.postValue(DishesAppState.EmptyList)
+                return
+            }
             dishesLiveData.value = allDishes
         } else {
             // Фильтруем список блюд по выбранному тегу
-            val filteredDishes = allDishes.filter { dish ->
+            val filteredDishes: List<DisheResponse> = allDishes.filter { dish ->
                 dish.tegs.contains(selectedTag)
+            }
+            if (filteredDishes.isEmpty()) {
+                liveData.postValue(DishesAppState.EmptyList)
+                return
             }
             dishesLiveData.value = filteredDishes
         }
     }
 
     fun getLiveData() = liveData
+
     fun getDishes() {
         repository.getDishes(callback)
     }
 
+
+    //Callback поменять
     private val callback = object : Callback {
         override fun onResponse(dishes: DishesDTO) {
             liveData.postValue(DishesAppState.Success(dishes))
@@ -74,8 +88,9 @@ class DishesViewModel(
     }
 
     sealed class DishesAppState {
-        object Loading: DishesAppState()
-        data class Success(val dishes: DishesDTO): DishesAppState()
-        data class Error(val error: Throwable): DishesAppState()
+        data class Success(val dishes: DishesDTO) : DishesAppState()
+        data class Error(val error: Throwable) : DishesAppState()
+        object Loading : DishesAppState()
+        object EmptyList : DishesAppState()
     }
 }
