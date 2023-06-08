@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
+import coil.transform.RoundedCornersTransformation
 import com.example.myfoodapp.R
 import com.example.myfoodapp.databinding.FragmentMenuListItemBinding
 import com.example.myfoodapp.response.dishes.Dishe

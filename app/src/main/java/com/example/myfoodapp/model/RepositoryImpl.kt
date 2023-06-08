@@ -1,6 +1,6 @@
 package com.example.myfoodapp.model
 
-import com.example.myfoodapp.BASE_URL
+import com.example.myfoodapp.commom.BASE_URL
 import com.example.myfoodapp.response.categories.CategoriesDTO
 import com.example.myfoodapp.viewmodel.MainViewModel
 import com.google.gson.GsonBuilder

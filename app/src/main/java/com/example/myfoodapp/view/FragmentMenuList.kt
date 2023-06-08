@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.myfoodapp.KEY_BUNDLE
+import com.example.myfoodapp.commom.KEY_BUNDLE_TITLE
+import com.example.myfoodapp.commom.KEY_CATEGORIES_BUNDLE
 import com.example.myfoodapp.databinding.FragmentMenuListBinding
 import com.example.myfoodapp.viewmodel.DishesAppState
 import com.example.myfoodapp.viewmodel.DishesViewModel
@@ -39,8 +40,9 @@ class FragmentMenuList : Fragment() {
             getLiveData().observe(viewLifecycleOwner, observer)
             getDishes()
         }
-//        val categoryName = arguments?.getInt(KEY_BUNDLE)
-//        binding.tvDishes.text = categoryName.toString()
+        val categoryId = arguments?.getInt(KEY_CATEGORIES_BUNDLE)
+        val categoryName = arguments?.getString(KEY_BUNDLE_TITLE)
+        binding.tvDishes.text = categoryName.toString()
     }
 
     private fun renderData(appState: DishesAppState) {

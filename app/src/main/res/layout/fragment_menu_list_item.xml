@@ -2,18 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="5dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginEnd="5dp"
-    android:background="#DCDAD6"
+    android:layout_marginStart="@dimen/margin_start_5"
+    android:layout_marginTop="@dimen/margin_top_5"
+    android:layout_marginEnd="@dimen/margin_end_5"
+    android:background="@color/fragment_menu_list_item_background_color"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgDishes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="@dimen/img_dishes_size"
+        android:layout_height="@dimen/img_dishes_size"
+        android:scaleType="centerCrop"
+        android:layout_marginStart="@dimen/margin_start_5"
+        android:layout_marginTop="@dimen/margin_top_5"
         android:src="@drawable/ic_no_photo_vector" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -21,9 +22,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:textSize="10sp"
+        android:layout_marginStart="@dimen/margin_start_3"
+        android:layout_marginTop="@dimen/margin_top_5"
+        android:textSize="@dimen/tv_dishes_text_size"
         android:textStyle="bold" />
 
 </LinearLayout>

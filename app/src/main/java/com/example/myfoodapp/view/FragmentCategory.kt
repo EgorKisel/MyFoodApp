@@ -1,47 +1,36 @@
 package com.example.myfoodapp.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.myfoodapp.KEY_BUNDLE
 import com.example.myfoodapp.R
+import com.example.myfoodapp.commom.KEY_BUNDLE_TITLE
+import com.example.myfoodapp.commom.KEY_CATEGORIES_BUNDLE
+import com.example.myfoodapp.commom.getCurrentDate
+import com.example.myfoodapp.commom.openDetails
 import com.example.myfoodapp.databinding.FragmentMainBinding
+import com.example.myfoodapp.response.categories.CategoryKitchen
 import com.example.myfoodapp.viewmodel.AppState
 import com.example.myfoodapp.viewmodel.MainViewModel
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
-class FragmentMain : Fragment(), OnItemClickListener {
+class FragmentCategory : Fragment(R.layout.fragment_main), OnItemClickListener {
 
     private var _binding: FragmentMainBinding? = null
     private val binding: FragmentMainBinding get() = _binding!!
-    private val simpleDateFormat = SimpleDateFormat("dd MMMM, yyyy", Locale("ru"))
-    private val formattedDate = simpleDateFormat.format(Date())
     private val viewModel: MainViewModel by lazy {
         ViewModelProvider(this)[MainViewModel::class.java]
     }
     private val adapter = AdapterMain()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentMainBinding.bind(view)
         val observer = Observer<AppState> { renderData(it) }
         binding.recyclerMain.adapter = adapter
         adapter.mSetOnClickListener(this)
-        binding.tvData.text = formattedDate
+        binding.tvData.text = getCurrentDate()
         viewModel.apply {
             getLiveData().observe(viewLifecycleOwner, observer)
             getCategories()
@@ -65,14 +54,17 @@ class FragmentMain : Fragment(), OnItemClickListener {
 
     companion object {
         @JvmStatic
-        fun newInstance() = FragmentMain()
+        fun newInstance() = FragmentCategory()
     }
 
-    override fun onItemClick(id: Int) {
-        val bundle = Bundle()
-        bundle.putInt(KEY_BUNDLE, id)
-        requireActivity().supportFragmentManager.beginTransaction()
-            .add(R.id.fragmentContainerMain, FragmentMenuList.newInstance(bundle))
-            .addToBackStack("").commit()
+    override fun onItemClick(categoryKitchen: CategoryKitchen) {
+        Bundle().apply {
+            putInt(KEY_CATEGORIES_BUNDLE, categoryKitchen.id)
+            putString(KEY_BUNDLE_TITLE, categoryKitchen.name)
+            this@FragmentCategory.openDetails(
+                FragmentMenuList.newInstance(this),
+                R.id.fragmentContainerMain
+            )
+        }
     }
 }

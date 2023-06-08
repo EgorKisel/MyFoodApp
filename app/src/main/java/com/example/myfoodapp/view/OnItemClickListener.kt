@@ -1,5 +1,7 @@
 package com.example.myfoodapp.view
 
+import com.example.myfoodapp.response.categories.CategoryKitchen
+
 interface OnItemClickListener {
-    fun onItemClick(id: Int)
+    fun onItemClick(categoryKitchen: CategoryKitchen)
 }

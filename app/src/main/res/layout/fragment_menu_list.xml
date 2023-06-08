@@ -11,14 +11,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/margin_top_5"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ic_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="@dimen/margin_start_22"
             android:src="@drawable/ic_back" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -28,16 +28,16 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Азиатская кухня"
-            android:textSize="18sp"
+            android:textSize="@dimen/tv_dishes_title_text_size"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgAccountPhoto"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:layout_width="@dimen/account_photo_size"
+            android:layout_height="@dimen/account_photo_size"
             android:layout_gravity="end"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginTop="@dimen/margin_top_5"
+            android:layout_marginEnd="@dimen/margin_end_5"
             android:layout_weight="0"
             android:src="@drawable/img_account_photo" />
     </LinearLayout>
@@ -51,7 +51,7 @@
             android:id="@+id/chipGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="@dimen/margin_start_5"
             android:gravity="center_horizontal"
             android:stretchMode="columnWidth"
             app:singleSelection="true">
@@ -62,28 +62,28 @@
                 android:layout_height="wrap_content"
                 android:checkable="true"
                 android:checked="true"
-                android:text="Всё меню" />
+                android:text="@string/all_menu" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/salads"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
-                android:text="Салаты" />
+                android:text="@string/salads" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/withRise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
-                android:text="С рисом" />
+                android:text="@string/with_rise" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/withFish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
-                android:text="С рыбой" />
+                android:text="@string/with_fish" />
 
         </com.google.android.material.chip.ChipGroup>
     </LinearLayout>
