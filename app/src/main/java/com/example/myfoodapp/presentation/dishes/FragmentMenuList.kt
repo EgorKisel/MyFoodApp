@@ -8,12 +8,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.myfoodapp.R
 import com.example.myfoodapp.commom.KEY_BUNDLE_TITLE
 import com.example.myfoodapp.commom.KEY_CATEGORIES_BUNDLE
+import com.example.myfoodapp.commom.KEY_DISH_BUNDLE
 import com.example.myfoodapp.data.model.DisheResponse
 import com.example.myfoodapp.databinding.FragmentMenuListBinding
 import com.example.myfoodapp.presentation.dishes.adapter.AdapterDishes
+import com.example.myfoodapp.presentation.dishes.adapter.OnDishesClickListener
+import com.example.myfoodapp.presentation.product.DialogFragmentProduct
 import com.google.android.material.chip.Chip
 
-class FragmentMenuList : Fragment(R.layout.fragment_menu_list) {
+class FragmentMenuList : Fragment(R.layout.fragment_menu_list), OnDishesClickListener {
 
     private var _binding: FragmentMenuListBinding? = null
     private val binding: FragmentMenuListBinding get() = _binding!!
@@ -28,6 +31,7 @@ class FragmentMenuList : Fragment(R.layout.fragment_menu_list) {
         val observer = Observer<DishesViewModel.DishesAppState> { renderData(it) }
         val dishesObserver = Observer<List<DisheResponse>> { dishes ->
             adapter.setData(dishes)
+            adapter.mSetOnClickListener(this)
         }
         binding.recyclerDishes.adapter = adapter
         viewModel.apply {
@@ -76,4 +80,14 @@ class FragmentMenuList : Fragment(R.layout.fragment_menu_list) {
             return fragment
         }
     }
+
+    override fun onItemClick(dishes: DisheResponse) {
+        val args = Bundle().apply {
+            putParcelable(KEY_DISH_BUNDLE, dishes)
+        }
+        val dialogFragment = DialogFragmentProduct()
+        dialogFragment.show(parentFragmentManager, "dialog_tag")
+        dialogFragment.arguments = args
+    }
 }
+

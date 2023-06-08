@@ -7,10 +7,11 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgProduct"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_start_5"
         android:layout_marginTop="@dimen/margin_top_5"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_no_photo_vector" />
@@ -85,8 +86,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_start_5"
         android:layout_marginTop="@dimen/margin_top_5"
-        android:text="@string/add_to_basket"
         android:layout_marginEnd="@dimen/margin_end_5"
+        android:text="@string/add_to_basket"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvProductDescription" />
 

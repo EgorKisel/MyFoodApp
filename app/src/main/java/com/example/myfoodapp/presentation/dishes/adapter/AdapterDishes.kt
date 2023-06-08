@@ -14,6 +14,12 @@ import com.example.myfoodapp.databinding.FragmentMenuListItemBinding
 class AdapterDishes(private var data: List<DisheResponse> = listOf()) :
     RecyclerView.Adapter<AdapterDishes.ViewHolderDishes>() {
 
+    private lateinit var onItemClickListener: OnDishesClickListener
+
+    fun mSetOnClickListener(listener: OnDishesClickListener) {
+        onItemClickListener = listener
+    }
+
     fun setData(dataNew: List<DisheResponse>) {
         val diffUtil = DishesDiffUtil(this.data, dataNew)
         val diffResult = DiffUtil.calculateDiff(diffUtil)
@@ -28,6 +34,9 @@ class AdapterDishes(private var data: List<DisheResponse> = listOf()) :
             binding.imgDishes.load(disheResponse.imageUrl) {
                 placeholder(R.drawable.ic_no_photo_vector)
                 error(R.drawable.ic_no_photo_vector)
+            }
+            binding.root.setOnClickListener {
+                onItemClickListener.onItemClick(disheResponse)
             }
         }
     }
