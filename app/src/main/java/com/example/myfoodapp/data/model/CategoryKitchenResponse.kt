@@ -1,9 +1,9 @@
-package com.example.myfoodapp.response.categories
+package com.example.myfoodapp.data.model
 
 
 import com.google.gson.annotations.SerializedName
 
-data class CategoryKitchen(
+data class CategoryKitchenResponse(
     @SerializedName("id")
     val id: Int,
     @SerializedName("image_url")

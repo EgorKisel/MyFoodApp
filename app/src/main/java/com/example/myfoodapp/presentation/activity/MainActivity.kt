@@ -1,8 +1,9 @@
-package com.example.myfoodapp.view
+package com.example.myfoodapp.presentation.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myfoodapp.R
+import com.example.myfoodapp.presentation.category.FragmentCategory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

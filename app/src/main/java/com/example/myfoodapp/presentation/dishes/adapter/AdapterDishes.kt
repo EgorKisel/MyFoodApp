@@ -1,29 +1,31 @@
-package com.example.myfoodapp.view
+package com.example.myfoodapp.presentation.dishes.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
-import coil.transform.RoundedCornersTransformation
 import com.example.myfoodapp.R
+import com.example.myfoodapp.data.model.DisheResponse
 import com.example.myfoodapp.databinding.FragmentMenuListItemBinding
-import com.example.myfoodapp.response.dishes.Dishe
 
-class AdapterDishes(private var data: List<Dishe> = listOf()) :
+class AdapterDishes(private var data: List<DisheResponse> = listOf()) :
     RecyclerView.Adapter<AdapterDishes.ViewHolderDishes>() {
 
-    fun setData(dataNew: List<Dishe>) {
+    fun setData(dataNew: List<DisheResponse>) {
+        val diffUtil = DishesDiffUtil(this.data, dataNew)
+        val diffResult = DiffUtil.calculateDiff(diffUtil)
         this.data = dataNew
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     inner class ViewHolderDishes(itemView: View) : ViewHolder(itemView) {
-        fun bind(dishe: Dishe) {
+        fun bind(disheResponse: DisheResponse) {
             val binding = FragmentMenuListItemBinding.bind(itemView)
-            binding.tvDishes.text = dishe.name
-            binding.imgDishes.load(dishe.imageUrl) {
+            binding.tvDishes.text = disheResponse.name
+            binding.imgDishes.load(disheResponse.imageUrl) {
                 placeholder(R.drawable.ic_no_photo_vector)
                 error(R.drawable.ic_no_photo_vector)
             }

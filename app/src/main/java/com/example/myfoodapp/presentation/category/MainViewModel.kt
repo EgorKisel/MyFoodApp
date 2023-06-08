@@ -1,20 +1,20 @@
-package com.example.myfoodapp.viewmodel
+package com.example.myfoodapp.presentation.category
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myfoodapp.model.Repository
-import com.example.myfoodapp.model.RepositoryImpl
-import com.example.myfoodapp.response.categories.CategoriesDTO
+import com.example.myfoodapp.data.model.CategoriesDTO
+import com.example.myfoodapp.data.repoimpl.RepositoryCategoryImpl
+import com.example.myfoodapp.domain.RepositoryCategory
 
 class MainViewModel(
     private val liveData: MutableLiveData<AppState> = MutableLiveData(),
-    private val repository: Repository = RepositoryImpl()
+    private val repositoryCategory: RepositoryCategory = RepositoryCategoryImpl()
 ) : ViewModel() {
 
     fun getLiveData() = liveData
 
     fun getCategories() {
-        repository.getCategories(callback)
+        repositoryCategory.getCategories(callback)
     }
 
     private val callback = object : Callback {
@@ -32,5 +32,11 @@ class MainViewModel(
     interface Callback {
         fun onResponse(category: CategoriesDTO)
         fun onFail()
+    }
+
+    sealed class AppState {
+        object Loading: AppState()
+        data class Success(val categoryDTO: CategoriesDTO): AppState()
+        data class Error(val error: Throwable): AppState()
     }
 }

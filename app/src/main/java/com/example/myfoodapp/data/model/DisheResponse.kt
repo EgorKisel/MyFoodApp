@@ -1,9 +1,9 @@
-package com.example.myfoodapp.response.dishes
+package com.example.myfoodapp.data.model
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Dishe(
+data class DisheResponse(
     @SerializedName("description")
     val description: String,
     @SerializedName("id")

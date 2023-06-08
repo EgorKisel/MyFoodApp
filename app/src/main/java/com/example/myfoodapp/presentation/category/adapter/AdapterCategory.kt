@@ -1,17 +1,18 @@
-package com.example.myfoodapp.view
+package com.example.myfoodapp.presentation.category.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
 import coil.transform.RoundedCornersTransformation
+import com.example.myfoodapp.data.model.CategoryKitchenResponse
 import com.example.myfoodapp.databinding.FragmentMainRecyclerItemBinding
-import com.example.myfoodapp.response.categories.CategoryKitchen
 
-class AdapterMain(private var data: List<CategoryKitchen> = listOf()) :
-    RecyclerView.Adapter<AdapterMain.ViewHolderMain>() {
+class AdapterCategory(private var data: List<CategoryKitchenResponse> = listOf()) :
+    RecyclerView.Adapter<AdapterCategory.ViewHolderMain>() {
 
     private lateinit var onItemClickListener: OnItemClickListener
 
@@ -19,20 +20,22 @@ class AdapterMain(private var data: List<CategoryKitchen> = listOf()) :
         onItemClickListener = listener
     }
 
-    fun setData(dataNew: List<CategoryKitchen>) {
+    fun setData(dataNew: List<CategoryKitchenResponse>) {
+        val diffUtil = CategoryDiffUtil(this.data, dataNew)
+        val diffResult = DiffUtil.calculateDiff(diffUtil)
         this.data = dataNew
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     inner class ViewHolderMain(itemView: View) : ViewHolder(itemView) {
-        fun bind(categoryKitchen: CategoryKitchen) {
+        fun bind(categoryKitchenResponse: CategoryKitchenResponse) {
             val binding = FragmentMainRecyclerItemBinding.bind(itemView)
-            binding.textView.text = categoryKitchen.name
-            binding.imageView.load(categoryKitchen.imageUrl) {
+            binding.textView.text = categoryKitchenResponse.name
+            binding.imageView.load(categoryKitchenResponse.imageUrl) {
                 transformations(RoundedCornersTransformation(25f))
             }
             binding.root.setOnClickListener {
-                onItemClickListener.onItemClick(categoryKitchen)
+                onItemClickListener.onItemClick(categoryKitchenResponse)
             }
         }
     }

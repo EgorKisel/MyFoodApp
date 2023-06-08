@@ -1,8 +1,10 @@
-package com.example.myfoodapp.model
+package com.example.myfoodapp.data.repoimpl
 
 import com.example.myfoodapp.commom.BASE_URL
-import com.example.myfoodapp.response.categories.CategoriesDTO
-import com.example.myfoodapp.viewmodel.MainViewModel
+import com.example.myfoodapp.data.model.DishesDTO
+import com.example.myfoodapp.data.service.DishesApi
+import com.example.myfoodapp.domain.RepositoryDishes
+import com.example.myfoodapp.presentation.dishes.DishesViewModel
 import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Callback
@@ -10,19 +12,16 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RepositoryImpl : Repository {
+class RepositoryDishesImpl: RepositoryDishes {
 
     private val api = Retrofit.Builder().apply {
         baseUrl(BASE_URL)
         addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
-    }.build().create(CategoriesApi::class.java)
+    }.build().create(DishesApi::class.java)
 
-    override fun getCategories(callbackMy: MainViewModel.Callback) {
-        api.getCategories().enqueue(object : Callback<CategoriesDTO> {
-            override fun onResponse(
-                call: Call<CategoriesDTO>,
-                response: Response<CategoriesDTO>
-            ) {
+    override fun getDishes(callbackMy: DishesViewModel.Callback) {
+        api.getDishes().enqueue(object : Callback<DishesDTO> {
+            override fun onResponse(call: Call<DishesDTO>, response: Response<DishesDTO>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         callbackMy.onResponse(it)
@@ -30,7 +29,7 @@ class RepositoryImpl : Repository {
                 }
             }
 
-            override fun onFailure(call: Call<CategoriesDTO>, t: Throwable) {
+            override fun onFailure(call: Call<DishesDTO>, t: Throwable) {
                 // Not yet implemented
             }
 
