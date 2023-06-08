@@ -10,3 +10,4 @@ const val LOCALE_FORMAT_DATE = "ru"
 const val KEY_CATEGORIES_BUNDLE = "key_categories_bundle"
 const val KEY_BUNDLE_TITLE = "key_categories_bundle"
 const val KEY_DISH_BUNDLE = "key_dish_bundle"
+
