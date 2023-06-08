@@ -1,4 +1,4 @@
-package com.example.myfoodapp.commom
+package com.example.myfoodapp.common
 
 import androidx.fragment.app.Fragment
 import java.text.SimpleDateFormat

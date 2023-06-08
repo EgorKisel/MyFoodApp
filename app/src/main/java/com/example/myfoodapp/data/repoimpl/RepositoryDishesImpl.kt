@@ -1,6 +1,6 @@
 package com.example.myfoodapp.data.repoimpl
 
-import com.example.myfoodapp.commom.BASE_URL
+import com.example.myfoodapp.common.BASE_URL
 import com.example.myfoodapp.data.model.DishesDTO
 import com.example.myfoodapp.data.service.DishesApi
 import com.example.myfoodapp.domain.RepositoryDishes

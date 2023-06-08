@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myfoodapp.R
-import com.example.myfoodapp.commom.KEY_BUNDLE_TITLE
-import com.example.myfoodapp.commom.KEY_CATEGORIES_BUNDLE
-import com.example.myfoodapp.commom.KEY_DISH_BUNDLE
+import com.example.myfoodapp.common.KEY_BUNDLE_TITLE
+import com.example.myfoodapp.common.KEY_CATEGORIES_BUNDLE
+import com.example.myfoodapp.common.KEY_DISH_BUNDLE
 import com.example.myfoodapp.data.model.DisheResponse
 import com.example.myfoodapp.databinding.FragmentMenuListBinding
 import com.example.myfoodapp.presentation.dishes.adapter.AdapterDishes

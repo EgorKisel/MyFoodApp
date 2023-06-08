@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import coil.load
 import com.example.myfoodapp.R
-import com.example.myfoodapp.commom.KEY_DISH_BUNDLE
+import com.example.myfoodapp.common.KEY_DISH_BUNDLE
 import com.example.myfoodapp.data.model.DisheResponse
 
 class DialogFragmentProduct: DialogFragment() {

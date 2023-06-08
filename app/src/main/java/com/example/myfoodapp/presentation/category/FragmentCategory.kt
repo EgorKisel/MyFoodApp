@@ -6,10 +6,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myfoodapp.R
-import com.example.myfoodapp.commom.KEY_BUNDLE_TITLE
-import com.example.myfoodapp.commom.KEY_CATEGORIES_BUNDLE
-import com.example.myfoodapp.commom.getCurrentDate
-import com.example.myfoodapp.commom.openDetails
+import com.example.myfoodapp.common.KEY_BUNDLE_TITLE
+import com.example.myfoodapp.common.KEY_CATEGORIES_BUNDLE
+import com.example.myfoodapp.common.getCurrentDate
+import com.example.myfoodapp.common.openDetails
 import com.example.myfoodapp.data.model.CategoryKitchenResponse
 import com.example.myfoodapp.databinding.FragmentMainBinding
 import com.example.myfoodapp.presentation.category.adapter.AdapterCategory
