@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myfoodapp.common.ALL_MENU
-import com.example.myfoodapp.data.model.DisheResponse
-import com.example.myfoodapp.data.model.DishesDTO
+import com.example.myfoodapp.data.model.network.DisheResponse
+import com.example.myfoodapp.data.model.network.DishesDTO
 import com.example.myfoodapp.data.repoimpl.RepositoryDishesImpl
 import com.example.myfoodapp.domain.RepositoryDishes
 

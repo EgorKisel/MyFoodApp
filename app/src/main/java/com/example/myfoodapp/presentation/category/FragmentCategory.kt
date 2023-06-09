@@ -10,7 +10,7 @@ import com.example.myfoodapp.common.KEY_BUNDLE_TITLE
 import com.example.myfoodapp.common.KEY_CATEGORIES_BUNDLE
 import com.example.myfoodapp.common.getCurrentDate
 import com.example.myfoodapp.common.openDetails
-import com.example.myfoodapp.data.model.CategoryKitchenResponse
+import com.example.myfoodapp.data.model.network.CategoryKitchenResponse
 import com.example.myfoodapp.databinding.FragmentMainBinding
 import com.example.myfoodapp.presentation.category.adapter.AdapterCategory
 import com.example.myfoodapp.presentation.category.adapter.OnItemClickListener
@@ -32,7 +32,7 @@ class FragmentCategory : Fragment(R.layout.fragment_main), OnItemClickListener {
         binding.recyclerMain.adapter = adapter
         adapter.mSetOnClickListener(this)
         binding.tvData.text = getCurrentDate()
-        viewModel.apply {
+        with(viewModel) {
             getLiveData().observe(viewLifecycleOwner, observer)
             getCategories()
         }

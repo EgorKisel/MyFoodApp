@@ -3,13 +3,19 @@ package com.example.myfoodapp.presentation.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myfoodapp.R
+import com.example.myfoodapp.databinding.ActivityMainBinding
+import com.example.myfoodapp.presentation.basket.FragmentBasket
 import com.example.myfoodapp.presentation.category.FragmentCategory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         disableUnusedMenus()
 
@@ -17,6 +23,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainerMain, FragmentCategory.newInstance()).commit()
         }
+        init()
     }
 
     private fun disableUnusedMenus() {
@@ -27,7 +34,27 @@ class MainActivity : AppCompatActivity() {
             bottomNavigationView.menu.findItem(R.id.actionAccountScreen)
 
         menuItemActionSearchScreen.isEnabled = false
-        menuItemActionBasketScreen.isEnabled = false
         menuItemActionAccountScreen.isEnabled = false
+    }
+
+    private fun init() {
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.actionMainScreen -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainerMain, FragmentCategory.newInstance())
+                        .commit()
+                }
+
+                R.id.actionBasketScreen -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainerMain, FragmentBasket.newInstance()).commit()
+                }
+
+                R.id.actionAccountScreen -> {}
+                R.id.actionSearchScreen -> {}
+            }
+            true
+        }
     }
 }

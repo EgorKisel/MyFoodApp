@@ -9,7 +9,7 @@ import com.example.myfoodapp.R
 import com.example.myfoodapp.common.KEY_BUNDLE_TITLE
 import com.example.myfoodapp.common.KEY_DISH_BUNDLE
 import com.example.myfoodapp.common.makeToast
-import com.example.myfoodapp.data.model.DisheResponse
+import com.example.myfoodapp.data.model.network.DisheResponse
 import com.example.myfoodapp.databinding.FragmentMenuListBinding
 import com.example.myfoodapp.presentation.dishes.adapter.AdapterDishes
 import com.example.myfoodapp.presentation.dishes.adapter.OnDishesClickListener

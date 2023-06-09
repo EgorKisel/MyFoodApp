@@ -2,7 +2,7 @@ package com.example.myfoodapp.presentation.category
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myfoodapp.data.model.CategoriesDTO
+import com.example.myfoodapp.data.model.network.CategoriesDTO
 import com.example.myfoodapp.data.repoimpl.RepositoryCategoryImpl
 import com.example.myfoodapp.domain.RepositoryCategory
 

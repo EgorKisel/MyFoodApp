@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
 import com.example.myfoodapp.R
-import com.example.myfoodapp.data.model.DisheResponse
+import com.example.myfoodapp.data.model.network.DisheResponse
 import com.example.myfoodapp.databinding.FragmentMenuListItemBinding
 
 class AdapterDishes(private var data: List<DisheResponse> = listOf()) :

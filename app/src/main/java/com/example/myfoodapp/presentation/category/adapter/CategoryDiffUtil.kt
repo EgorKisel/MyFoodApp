@@ -1,7 +1,7 @@
 package com.example.myfoodapp.presentation.category.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.myfoodapp.data.model.CategoryKitchenResponse
+import com.example.myfoodapp.data.model.network.CategoryKitchenResponse
 
 class CategoryDiffUtil(
     private val oldItems: List<CategoryKitchenResponse>,

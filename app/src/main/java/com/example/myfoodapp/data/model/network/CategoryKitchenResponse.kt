@@ -1,4 +1,4 @@
-package com.example.myfoodapp.data.model
+package com.example.myfoodapp.data.model.network
 
 
 import com.google.gson.annotations.SerializedName

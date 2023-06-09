@@ -1,7 +1,7 @@
 package com.example.myfoodapp.data.repoimpl
 
 import com.example.myfoodapp.common.BASE_URL
-import com.example.myfoodapp.data.model.CategoriesDTO
+import com.example.myfoodapp.data.model.network.CategoriesDTO
 import com.example.myfoodapp.data.service.CategoriesApi
 import com.example.myfoodapp.domain.RepositoryCategory
 import com.example.myfoodapp.presentation.category.MainViewModel

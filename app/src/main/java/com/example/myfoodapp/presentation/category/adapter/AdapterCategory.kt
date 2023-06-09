@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.example.myfoodapp.data.model.CategoryKitchenResponse
+import com.example.myfoodapp.data.model.network.CategoryKitchenResponse
 import com.example.myfoodapp.databinding.FragmentMainRecyclerItemBinding
 
 class AdapterCategory(private var data: List<CategoryKitchenResponse> = listOf()) :

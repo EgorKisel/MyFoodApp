@@ -14,4 +14,6 @@
     <dimen name="margin_end_10">10dp</dimen>
     <dimen name="margin_16">16dp</dimen>
     <dimen name="img_btn_size">20dp</dimen>
+    <dimen name="img_cart_size">62dp</dimen>
+    <dimen name="margin_top_2">2dp</dimen>
 </resources>

@@ -1,7 +1,7 @@
 package com.example.myfoodapp.data.service
 
 import com.example.myfoodapp.common.BASE_ENDPOINT
-import com.example.myfoodapp.data.model.CategoriesDTO
+import com.example.myfoodapp.data.model.network.CategoriesDTO
 import retrofit2.Call
 import retrofit2.http.GET
 
