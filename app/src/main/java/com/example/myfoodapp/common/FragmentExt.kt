@@ -1,5 +1,6 @@
 package com.example.myfoodapp.common
 
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -13,4 +14,8 @@ fun Fragment.getCurrentDate(): String {
 fun Fragment.openDetails(fragment: Fragment, containerId: Int) {
     requireActivity().supportFragmentManager.beginTransaction().add(containerId, fragment)
         .addToBackStack(null).commit()
+}
+
+fun Fragment.makeToast(text: Int) {
+    Toast.makeText(context, getString(text), Toast.LENGTH_LONG).show()
 }

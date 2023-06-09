@@ -22,6 +22,7 @@ class RepositoryDishesImpl: RepositoryDishes {
     override fun getDishes(callbackMy: DishesViewModel.Callback) {
         api.getDishes().enqueue(object : Callback<DishesDTO> {
             override fun onResponse(call: Call<DishesDTO>, response: Response<DishesDTO>) {
+                // Во ViewModel
                 if (response.isSuccessful) {
                     response.body()?.let {
                         callbackMy.onResponse(it)

@@ -25,6 +25,7 @@ class RepositoryCategoryImpl : RepositoryCategory {
                 call: Call<CategoriesDTO>,
                 response: Response<CategoriesDTO>
             ) {
+                // Во ViewModel
                 if (response.isSuccessful) {
                     response.body()?.let {
                         callbackMy.onResponse(it)

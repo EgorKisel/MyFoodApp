@@ -3,6 +3,7 @@ package com.example.myfoodapp.presentation.dishes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myfoodapp.common.ALL_MENU
 import com.example.myfoodapp.data.model.DisheResponse
 import com.example.myfoodapp.data.model.DishesDTO
 import com.example.myfoodapp.data.repoimpl.RepositoryDishesImpl
@@ -19,7 +20,7 @@ class DishesViewModel(
     fun getSelectedTagLiveData(): LiveData<String> = selectedTagLiveData
     fun getDishesLiveData(): LiveData<List<DisheResponse>> = dishesLiveData
 
-    fun getDishes2() {
+    fun getDishes() {
         // Загрузка списка блюд
         repository.getDishes(object : Callback {
             override fun onResponse(dishesResponse: DishesDTO) {
@@ -29,44 +30,33 @@ class DishesViewModel(
             }
 
             override fun onFail() {
-                // Обработка ошибки
+                liveData.postValue(DishesAppState.Error(Throwable()))
             }
         })
     }
 
-    fun onChipSelected(tag: String) {
-        selectedTagLiveData.value = tag
-    }
-    fun filterDishesByTag() {
-        val selectedTag = selectedTagLiveData.value
-
-        if (selectedTag == "Всё меню") {
+    fun filterDishesByTag(tag: String) {
+        if (tag == ALL_MENU) {
+            if (allDishes.isEmpty()) {
+                liveData.postValue(DishesAppState.EmptyList)
+                return
+            }
             // Если выбран чип "Всё меню", показываем все блюда без фильтрации
             dishesLiveData.value = allDishes
         } else {
             // Фильтруем список блюд по выбранному тегу
             val filteredDishes = allDishes.filter { dish ->
-                dish.tegs.contains(selectedTag)
+                dish.tegs.contains(tag)
+            }
+            if (filteredDishes.isEmpty()) {
+                liveData.postValue(DishesAppState.EmptyList)
+                return
             }
             dishesLiveData.value = filteredDishes
         }
     }
 
     fun getLiveData() = liveData
-    fun getDishes() {
-        repository.getDishes(callback)
-    }
-
-    private val callback = object : Callback {
-        override fun onResponse(dishes: DishesDTO) {
-            liveData.postValue(DishesAppState.Success(dishes))
-        }
-
-        override fun onFail() {
-            liveData.postValue(DishesAppState.Error(Throwable()))
-        }
-
-    }
 
     interface Callback {
         fun onResponse(dishes: DishesDTO)
@@ -74,8 +64,9 @@ class DishesViewModel(
     }
 
     sealed class DishesAppState {
-        object Loading: DishesAppState()
-        data class Success(val dishes: DishesDTO): DishesAppState()
-        data class Error(val error: Throwable): DishesAppState()
+        data class Success(val dishes: DishesDTO) : DishesAppState()
+        data class Error(val error: Throwable) : DishesAppState()
+        object Loading : DishesAppState()
+        object EmptyList : DishesAppState()
     }
 }
