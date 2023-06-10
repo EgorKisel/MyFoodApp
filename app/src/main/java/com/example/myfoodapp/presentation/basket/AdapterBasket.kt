@@ -11,6 +11,11 @@ import com.example.myfoodapp.databinding.FragmentBasketItemBinding
 class AdapterBasket(private var data: List<CartItemDbEntity> = listOf()) :
     RecyclerView.Adapter<AdapterBasket.ViewHolderBasket>() {
 
+    private lateinit var onItemClickListener: OnItemClickListener
+    fun mSetOnClickListener(listener: OnItemClickListener) {
+        onItemClickListener = listener
+    }
+
     fun setData(dataNew: List<CartItemDbEntity>) {
         this.data = dataNew
         notifyDataSetChanged()
@@ -23,6 +28,9 @@ class AdapterBasket(private var data: List<CartItemDbEntity> = listOf()) :
             binding.tvCartProductName.text = cartItem.itemName
             binding.tvCartProductPrice.text = cartItem.itemPrice.toString()
             binding.tvCartProductWeight.text = cartItem.itemWeight.toString()
+
+            binding.btnAdd.setOnClickListener { onItemClickListener.onAddToBasket(cartItem) }
+            binding.btnRemove.setOnClickListener { onItemClickListener.onRemoveFromBasket(cartItem) }
         }
     }
 

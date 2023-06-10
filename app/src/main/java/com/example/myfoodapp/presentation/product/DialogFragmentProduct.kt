@@ -15,7 +15,9 @@ import com.example.myfoodapp.common.KEY_DISH_BUNDLE
 import com.example.myfoodapp.data.model.network.DisheResponse
 import com.example.myfoodapp.data.model.room.CartItemDbEntity
 import com.example.myfoodapp.databinding.DialogFragmentProductBinding
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DialogFragmentProduct : DialogFragment() {
     private var _binding: DialogFragmentProductBinding? = null
@@ -73,7 +75,9 @@ class DialogFragmentProduct : DialogFragment() {
 
     private fun saveCartItem(cartItem: CartItemDbEntity) {
         lifecycleScope.launch {
-            MyApp.database.cartItemDao().insertCartItem(cartItem)
+            withContext(Dispatchers.IO) {
+                MyApp.getBasketItems().insertCartItem(cartItem)
+            }
         }
     }
 
@@ -86,4 +90,5 @@ class DialogFragmentProduct : DialogFragment() {
         return Dialog(requireContext(), theme)
     }
 }
+
 

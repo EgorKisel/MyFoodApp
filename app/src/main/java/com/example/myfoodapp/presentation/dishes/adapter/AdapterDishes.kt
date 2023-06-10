@@ -43,7 +43,8 @@ class AdapterDishes(private var data: List<DisheResponse> = listOf()) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderDishes {
         val binding = FragmentMenuListItemBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false)
+            LayoutInflater.from(parent.context), parent, false
+        )
         return ViewHolderDishes(binding.root)
     }
 
