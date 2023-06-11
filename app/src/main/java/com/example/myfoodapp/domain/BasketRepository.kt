@@ -1,4 +1,4 @@
-package com.example.myfoodapp.presentation.basket
+package com.example.myfoodapp.domain
 
 import com.example.myfoodapp.data.model.room.CartItemDbEntity
 

@@ -1,4 +1,4 @@
-package com.example.myfoodapp.presentation.basket
+package com.example.myfoodapp.presentation.basket.adapter
 
 import android.view.LayoutInflater
 import android.view.View

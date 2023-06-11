@@ -1,8 +1,7 @@
 package com.example.myfoodapp.domain
 
 import com.example.myfoodapp.MyApp.Companion.getBasketItems
-import com.example.myfoodapp.presentation.basket.BasketRepository
-import com.example.myfoodapp.presentation.basket.BasketRepositoryImpl
+import com.example.myfoodapp.data.repoimpl.BasketRepositoryImpl
 
 class GetPriceUseCase(private val basketRepo: BasketRepository = BasketRepositoryImpl(getBasketItems())) {
     suspend operator fun invoke(): Double {
