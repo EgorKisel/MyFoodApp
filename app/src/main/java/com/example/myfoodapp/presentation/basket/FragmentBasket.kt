@@ -47,6 +47,8 @@ class FragmentBasket : Fragment(R.layout.fragment_basket), OnItemClickListener {
                     )
                 }
                 adapter.setData(basketItems)
+                val totalPrice = adapter.getTotalPrice()
+                binding.btnPay.text = totalPrice.toString()
             }
         }
     }
