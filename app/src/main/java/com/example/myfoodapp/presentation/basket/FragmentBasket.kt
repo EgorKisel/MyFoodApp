@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myfoodapp.R
+import com.example.myfoodapp.common.makeToast
 import com.example.myfoodapp.data.model.room.CartItemDbEntity
 import com.example.myfoodapp.databinding.FragmentBasketBinding
 
@@ -29,7 +30,9 @@ class FragmentBasket : Fragment(R.layout.fragment_basket), OnItemClickListener {
 
     private fun renderData(appState: BasketViewModel.AppState) {
         when (appState) {
-            is BasketViewModel.AppState.Error -> {}
+            is BasketViewModel.AppState.Error -> {
+                makeToast(R.string.something_went_wrong)
+            }
             BasketViewModel.AppState.Loading -> {}
             is BasketViewModel.AppState.Success -> {
                 val basketItems = appState.basket
@@ -59,8 +62,8 @@ class FragmentBasket : Fragment(R.layout.fragment_basket), OnItemClickListener {
     }
 
     override fun onAddToBasket(cartItem: CartItemDbEntity) {
-        viewModel.updateCartItemQuantity(cartItem.id, ++cartItem.quantity)
-        viewModel.getAllBasket()
+        val sum = cartItem.quantity + 1
+        viewModel.updateCartItemQuantity(cartItem.id, sum)
     }
 
     override fun onRemoveFromBasket(cartItem: CartItemDbEntity) {

@@ -12,7 +12,7 @@ interface CartItemDao {
     fun insertCartItem(cartItem: CartItemDbEntity)
 
     @Query("SELECT * FROM cart_items")
-    fun getAllCartItems(): List<CartItemDbEntity>
+    suspend fun getAllCartItems(): List<CartItemDbEntity>
 
     @Query("Delete from cart_items where id = :id")
     fun deleteCartItemById(id: Long)

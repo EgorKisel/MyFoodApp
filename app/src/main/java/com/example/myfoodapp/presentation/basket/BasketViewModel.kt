@@ -1,11 +1,13 @@
 package com.example.myfoodapp.presentation.basket
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myfoodapp.MyApp.Companion.getBasketItems
 import com.example.myfoodapp.data.model.room.CartItemDbEntity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -18,12 +20,11 @@ class BasketViewModel(
 
     fun getAllBasket() {
         viewModelScope.launch {
-            basketLiveData.value = AppState.Loading
-            val basketItems = withContext(Dispatchers.IO) {
-                basketRepo.getAllBasketItems { cartItems ->
-                    basketLiveData.postValue(AppState.Success(cartItems))
-                }
+            val items = basketRepo.getAllBasketItems()
+            items.forEach {
+                Log.d("@@@", it.itemName + it.quantity)
             }
+            basketLiveData.postValue(AppState.Success(basketRepo.getAllBasketItems()))
         }
     }
 
@@ -45,9 +46,8 @@ class BasketViewModel(
 
     fun updateCartItemQuantity(itemId: Long, quantity: Int) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                basketRepo.updateCartItemQuantity(itemId, quantity)
-            }
+            basketRepo.updateCartItemQuantity(itemId, quantity)
+            getAllBasket()
         }
     }
 

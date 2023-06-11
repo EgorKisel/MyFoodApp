@@ -21,7 +21,7 @@
         android:id="@+id/tvDishes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="start"
         android:layout_marginStart="@dimen/margin_start_3"
         android:layout_marginTop="@dimen/margin_top_5"
         android:textSize="@dimen/tv_dishes_text_size"

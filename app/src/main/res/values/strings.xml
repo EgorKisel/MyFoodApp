@@ -11,4 +11,6 @@
     <string name="with_fish">С рыбой</string>
     <string name="add_to_basket">Добавить в корзину</string>
     <string name="empty_list">Список пуст</string>
+    <string name="something_went_wrong">Что-то пошло не так</string>
+    <string name="loading">Загрузка...</string>
 </resources>

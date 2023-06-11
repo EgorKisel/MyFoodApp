@@ -4,9 +4,8 @@ import com.example.myfoodapp.data.model.room.CartItemDao
 import com.example.myfoodapp.data.model.room.CartItemDbEntity
 
 class BasketRepositoryImpl(private val cartItemDao: CartItemDao) : BasketRepository {
-    override fun getAllBasketItems(callback: (List<CartItemDbEntity>) -> Unit) {
-        val basketItems = cartItemDao.getAllCartItems()
-        callback(basketItems)
+    override suspend fun getAllBasketItems(): List<CartItemDbEntity> {
+        return cartItemDao.getAllCartItems()
     }
 
     override fun insertCartItem(cartItem: CartItemDbEntity) {
