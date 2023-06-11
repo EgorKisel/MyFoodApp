@@ -1,6 +1,5 @@
 package com.example.myfoodapp.data.model.room
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -16,8 +15,11 @@ interface CartItemDao {
     fun getAllCartItems(): List<CartItemDbEntity>
 
     @Query("Delete from cart_items where id = :id")
-    fun deleteItemById(id: Int)
+    fun deleteCartItemById(id: Long)
 
     @Delete
     fun deleteItem(cartItem: CartItemDbEntity)
+
+    @Query("UPDATE cart_items SET quantity = :quantity WHERE id = :itemId")
+    suspend fun updateCartItemQuantity(itemId: Long, quantity: Int)
 }

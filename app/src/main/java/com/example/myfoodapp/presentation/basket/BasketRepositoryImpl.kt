@@ -17,4 +17,12 @@ class BasketRepositoryImpl(private val cartItemDao: CartItemDao) : BasketReposit
         cartItemDao.deleteItem(cartItem)
     }
 
+    override suspend fun updateCartItemQuantity(itemId: Long, quantity: Int) {
+        cartItemDao.updateCartItemQuantity(itemId, quantity)
+    }
+
+    override suspend fun deleteCartItemById(itemId: Long) {
+        cartItemDao.deleteCartItemById(itemId)
+    }
+
 }

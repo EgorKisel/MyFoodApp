@@ -10,6 +10,17 @@ fun convertCartItemToDish(cartItem: CartItemDbEntity): List<Dishes> {
     }
 }
 
+fun convertCartItemToDishItem(cartItem: CartItemDbEntity): Dishes {
+    return Dishes(
+        cartItem.id,
+        cartItem.itemName,
+        cartItem.itemImage,
+        cartItem.itemPrice,
+        cartItem.itemWeight,
+        cartItem.quantity
+    )
+}
+
 fun convertDishToCartItem(dish: Dishes): CartItemDbEntity {
     return CartItemDbEntity(
         dish.id, dish.name, dish.image, dish.price, dish.weight, dish.quantity

@@ -8,7 +8,9 @@ import coil.load
 import com.example.myfoodapp.data.model.room.CartItemDbEntity
 import com.example.myfoodapp.databinding.FragmentBasketItemBinding
 
-class AdapterBasket(private var data: List<CartItemDbEntity> = listOf()) :
+class AdapterBasket(
+    private var data: List<CartItemDbEntity> = listOf()
+) :
     RecyclerView.Adapter<AdapterBasket.ViewHolderBasket>() {
 
     private lateinit var onItemClickListener: OnItemClickListener
@@ -22,15 +24,22 @@ class AdapterBasket(private var data: List<CartItemDbEntity> = listOf()) :
     }
 
     inner class ViewHolderBasket(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val quantityKey = "quantity_${adapterPosition}"
+
         fun bind(cartItem: CartItemDbEntity) {
             val binding = FragmentBasketItemBinding.bind(itemView)
             binding.imgCart.load(cartItem.itemImage)
             binding.tvCartProductName.text = cartItem.itemName
-            binding.tvCartProductPrice.text = cartItem.itemPrice.toString()
-            binding.tvCartProductWeight.text = cartItem.itemWeight.toString()
+            binding.tvCartProductPrice.text = cartItem.itemPrice.toString() + "Р"
+            binding.tvCartProductWeight.text = cartItem.itemWeight.toString() + "г"
 
-            binding.btnAdd.setOnClickListener { onItemClickListener.onAddToBasket(cartItem) }
-            binding.btnRemove.setOnClickListener { onItemClickListener.onRemoveFromBasket(cartItem) }
+            binding.tvQuantity.text = cartItem.quantity.toString()
+            binding.btnAdd.setOnClickListener {
+                onItemClickListener.onAddToBasket(cartItem)
+            }
+            binding.btnRemove.setOnClickListener {
+                    onItemClickListener.onRemoveFromBasket(cartItem)
+            }
         }
     }
 

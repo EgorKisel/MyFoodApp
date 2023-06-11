@@ -4,9 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myfoodapp.MyApp.Companion.getBasketItems
-import com.example.myfoodapp.common.convertCartItemToDish
-import com.example.myfoodapp.common.convertDishToCartItem
-import com.example.myfoodapp.data.model.room.Dishes
+import com.example.myfoodapp.data.model.room.CartItemDbEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,32 +21,47 @@ class BasketViewModel(
             basketLiveData.value = AppState.Loading
             val basketItems = withContext(Dispatchers.IO) {
                 basketRepo.getAllBasketItems { cartItems ->
-                    val dishList = cartItems.flatMap { convertCartItemToDish(it) }
-                    basketLiveData.postValue(AppState.Success(dishList))
+                    basketLiveData.postValue(AppState.Success(cartItems))
                 }
             }
         }
     }
 
-    fun insertItem(dish: Dishes) {
+    fun insertItem(cartItemDbEntity: CartItemDbEntity) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                basketRepo.insertCartItem(convertDishToCartItem(dish))
+                basketRepo.insertCartItem(cartItemDbEntity)
             }
         }
     }
 
-    fun deleteItem(dish: Dishes) {
+    fun deleteItem(cartItemDbEntity: CartItemDbEntity) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                basketRepo.deleteCartItem(convertDishToCartItem(dish))
+                basketRepo.deleteCartItem(cartItemDbEntity)
+            }
+        }
+    }
+
+    fun updateCartItemQuantity(itemId: Long, quantity: Int) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                basketRepo.updateCartItemQuantity(itemId, quantity)
+            }
+        }
+    }
+
+    fun deleteItemById(itemId: Long) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                basketRepo.deleteCartItemById(itemId)
             }
         }
     }
 
     sealed class AppState {
         object Loading : AppState()
-        data class Success(val basket: List<Dishes>) : AppState()
+        data class Success(val basket: List<CartItemDbEntity>) : AppState()
         data class Error(val error: Throwable) : AppState()
     }
 }

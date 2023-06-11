@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myfoodapp.R
-import com.example.myfoodapp.common.convertDishesToCartItems
 import com.example.myfoodapp.data.model.room.CartItemDbEntity
 import com.example.myfoodapp.databinding.FragmentBasketBinding
 
@@ -33,7 +32,17 @@ class FragmentBasket : Fragment(R.layout.fragment_basket), OnItemClickListener {
             is BasketViewModel.AppState.Error -> {}
             BasketViewModel.AppState.Loading -> {}
             is BasketViewModel.AppState.Success -> {
-                val basketItems = convertDishesToCartItems(appState.basket)
+                val basketItems = appState.basket
+                val items = basketItems.map {
+                    CartItemDbEntity(
+                        it.id,
+                        it.itemName,
+                        it.itemImage,
+                        it.itemPrice,
+                        it.itemWeight,
+                        it.quantity
+                    )
+                }
                 adapter.setData(basketItems)
             }
         }
@@ -50,10 +59,14 @@ class FragmentBasket : Fragment(R.layout.fragment_basket), OnItemClickListener {
     }
 
     override fun onAddToBasket(cartItem: CartItemDbEntity) {
-        //viewModel.insertItem()
+        viewModel.updateCartItemQuantity(cartItem.id, ++cartItem.quantity)
+        viewModel.getAllBasket()
     }
 
     override fun onRemoveFromBasket(cartItem: CartItemDbEntity) {
-        //viewModel.deleteItem()
+        if (cartItem.quantity > 1) {
+            viewModel.updateCartItemQuantity(cartItem.id, --cartItem.quantity)
+        } else  viewModel.deleteItemById(cartItem.id)
+        viewModel.getAllBasket()
     }
 }
