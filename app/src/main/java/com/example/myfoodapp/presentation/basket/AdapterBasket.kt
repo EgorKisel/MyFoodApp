@@ -18,14 +18,6 @@ class AdapterBasket(
         onItemClickListener = listener
     }
 
-    fun getTotalPrice(): Double {
-        var totalPrice = 0.0
-        for (item in data) {
-            totalPrice += item.itemPrice * item.quantity
-        }
-        return totalPrice
-    }
-
     fun setData(dataNew: List<CartItemDbEntity>) {
         this.data = dataNew
         notifyDataSetChanged()

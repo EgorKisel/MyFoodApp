@@ -1,18 +1,19 @@
 package com.example.myfoodapp.presentation.basket
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myfoodapp.MyApp.Companion.getBasketItems
 import com.example.myfoodapp.data.model.room.CartItemDbEntity
+import com.example.myfoodapp.domain.GetPriceUseCase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class BasketViewModel(
-    private val basketRepo: BasketRepository = BasketRepositoryImpl(getBasketItems())
+    private val basketRepo: BasketRepository = BasketRepositoryImpl(getBasketItems()),
+    private val getPriceUseCase: GetPriceUseCase = GetPriceUseCase(basketRepo)
 ) : ViewModel() {
 
     private val basketLiveData: MutableLiveData<AppState> = MutableLiveData()
@@ -21,10 +22,13 @@ class BasketViewModel(
     fun getAllBasket() {
         viewModelScope.launch {
             val items = basketRepo.getAllBasketItems()
-            items.forEach {
-                Log.d("@@@", it.itemName + it.quantity)
-            }
             basketLiveData.postValue(AppState.Success(basketRepo.getAllBasketItems()))
+        }
+    }
+
+    fun calculateTotalPrice(): Double {
+        return runBlocking {
+            getPriceUseCase.invoke()
         }
     }
 

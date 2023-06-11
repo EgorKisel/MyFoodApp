@@ -9,6 +9,7 @@ import com.example.myfoodapp.R
 import com.example.myfoodapp.common.makeToast
 import com.example.myfoodapp.data.model.room.CartItemDbEntity
 import com.example.myfoodapp.databinding.FragmentBasketBinding
+import com.example.myfoodapp.domain.GetPriceUseCase
 
 class FragmentBasket : Fragment(R.layout.fragment_basket), OnItemClickListener {
 
@@ -47,7 +48,7 @@ class FragmentBasket : Fragment(R.layout.fragment_basket), OnItemClickListener {
                     )
                 }
                 adapter.setData(basketItems)
-                val totalPrice = adapter.getTotalPrice()
+                val totalPrice = viewModel.calculateTotalPrice()
                 binding.btnPay.text = totalPrice.toString()
             }
         }
