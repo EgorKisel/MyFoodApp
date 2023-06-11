@@ -74,6 +74,5 @@ class FragmentBasket : Fragment(R.layout.fragment_basket), OnItemClickListener {
         if (cartItem.quantity > 1) {
             viewModel.updateCartItemQuantity(cartItem.id, --cartItem.quantity)
         } else  viewModel.deleteItemById(cartItem.id)
-        viewModel.getAllBasket()
     }
 }

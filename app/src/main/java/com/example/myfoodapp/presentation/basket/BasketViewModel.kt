@@ -61,6 +61,7 @@ class BasketViewModel(
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 basketRepo.deleteCartItemById(itemId)
+                getAllBasket()
             }
         }
     }
