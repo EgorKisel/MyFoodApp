@@ -33,7 +33,6 @@ class RepositoryDishesImpl: RepositoryDishes {
             override fun onFailure(call: Call<DishesDTO>, t: Throwable) {
                 // Not yet implemented
             }
-
         })
     }
 }

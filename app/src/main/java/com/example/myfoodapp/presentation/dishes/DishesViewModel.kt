@@ -12,12 +12,10 @@ import com.example.myfoodapp.domain.RepositoryDishes
 class DishesViewModel(
     private val liveData: MutableLiveData<DishesAppState> = MutableLiveData(),
     private val repository: RepositoryDishes = RepositoryDishesImpl(),
-    private val selectedTagLiveData: MutableLiveData<String> = MutableLiveData(),
     private val dishesLiveData: MutableLiveData<List<DisheResponse>> = MutableLiveData(),
     private val allDishes: MutableList<DisheResponse> = mutableListOf()
 ) : ViewModel() {
 
-    fun getSelectedTagLiveData(): LiveData<String> = selectedTagLiveData
     fun getDishesLiveData(): LiveData<List<DisheResponse>> = dishesLiveData
 
     fun getDishes() {

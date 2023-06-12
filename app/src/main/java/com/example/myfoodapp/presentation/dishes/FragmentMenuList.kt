@@ -42,8 +42,14 @@ class FragmentMenuList : Fragment(R.layout.fragment_menu_list), OnDishesClickLis
 
         val categoryName = arguments?.getString(KEY_BUNDLE_TITLE)
         binding.tvDishes.text = categoryName.toString()
-
+        backToCategories()
         dishesFiltering()
+    }
+
+    private fun backToCategories() {
+        binding.icBack.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     private fun dishesFiltering() {

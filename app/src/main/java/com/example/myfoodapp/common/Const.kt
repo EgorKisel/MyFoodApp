@@ -11,4 +11,5 @@ const val KEY_CATEGORIES_BUNDLE = "key_categories_bundle"
 const val KEY_BUNDLE_TITLE = "key_categories_bundle"
 const val KEY_DISH_BUNDLE = "key_dish_bundle"
 const val ALL_MENU = "Всё меню"
+const val DATABASE_NAME = "food.db"
 

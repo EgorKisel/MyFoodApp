@@ -48,7 +48,8 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.actionBasketScreen -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragmentContainerMain, FragmentBasket.newInstance()).commit()
+                        .replace(R.id.fragmentContainerMain, FragmentBasket.newInstance())
+                        .addToBackStack("").commit()
                 }
 
                 R.id.actionAccountScreen -> {}

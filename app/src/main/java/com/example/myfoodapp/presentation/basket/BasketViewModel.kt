@@ -3,7 +3,7 @@ package com.example.myfoodapp.presentation.basket
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myfoodapp.MyApp.Companion.getBasketItems
+import com.example.myfoodapp.core.MyApp.Companion.getBasketItems
 import com.example.myfoodapp.data.model.room.CartItemDbEntity
 import com.example.myfoodapp.data.repoimpl.BasketRepositoryImpl
 import com.example.myfoodapp.domain.BasketRepository
