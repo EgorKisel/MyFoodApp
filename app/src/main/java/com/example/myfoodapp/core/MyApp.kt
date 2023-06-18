@@ -4,11 +4,17 @@ import android.app.Application
 import androidx.room.Room
 import com.example.myfoodapp.data.model.room.AppDatabase
 import com.example.myfoodapp.data.model.room.CartItemDao
+import com.github.terrakok.cicerone.Cicerone
 
 
 class MyApp: Application() {
+
+    private val cicerone = Cicerone.create()
+    val router get() = cicerone.router
+    val navigatorHolder get() = cicerone.getNavigatorHolder()
+
     companion object {
-        private var appInstance: MyApp? = null
+        lateinit var appInstance: MyApp
         private var database: AppDatabase? = null
         private var DB_NAME = "myapp_database"
 

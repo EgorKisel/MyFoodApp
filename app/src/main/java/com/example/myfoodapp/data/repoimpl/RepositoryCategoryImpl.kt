@@ -4,7 +4,7 @@ import com.example.myfoodapp.common.BASE_URL
 import com.example.myfoodapp.data.model.network.CategoriesDTO
 import com.example.myfoodapp.data.service.CategoriesApi
 import com.example.myfoodapp.domain.RepositoryCategory
-import com.example.myfoodapp.presentation.category.MainViewModel
+import com.example.myfoodapp.presentation.category.CategoryViewModel
 import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,7 +19,7 @@ class RepositoryCategoryImpl : RepositoryCategory {
         addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
     }.build().create(CategoriesApi::class.java)
 
-    override fun getCategories(callbackMy: MainViewModel.Callback) {
+    override fun getCategories(callbackMy: CategoryViewModel.Callback) {
         api.getCategories().enqueue(object : Callback<CategoriesDTO> {
             override fun onResponse(
                 call: Call<CategoriesDTO>,

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentCategory">
+
+    <fragment
+        android:id="@+id/fragmentCategory"
+        android:name="com.example.myfoodapp.presentation.category.FragmentCategory"
+        android:label="FragmentCategory" >
+        <action
+            android:id="@+id/action_fragmentCategory_to_fragmentBasket"
+            app:destination="@id/fragmentBasket" />
+        <action
+            android:id="@+id/action_fragmentCategory_to_fragmentMenuList"
+            app:destination="@id/fragmentMenuList" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentMenuList"
+        android:name="com.example.myfoodapp.presentation.dishes.FragmentMenuList"
+        android:label="FragmentMenuList" >
+        <action
+            android:id="@+id/action_fragmentMenuList_to_dialogFragmentProduct"
+            app:destination="@id/dialogFragmentProduct" />
+        <action
+            android:id="@+id/action_fragmentMenuList_to_fragmentCategory"
+            app:destination="@id/fragmentCategory" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentBasket"
+        android:name="com.example.myfoodapp.presentation.basket.FragmentBasket"
+        android:label="FragmentBasket" />
+    <dialog
+        android:id="@+id/dialogFragmentProduct"
+        android:name="com.example.myfoodapp.presentation.product.DialogFragmentProduct"
+        android:label="DialogFragmentProduct" >
+        <action
+            android:id="@+id/action_dialogFragmentProduct_to_fragmentMenuList"
+            app:destination="@id/fragmentMenuList" />
+    </dialog>
+</navigation>

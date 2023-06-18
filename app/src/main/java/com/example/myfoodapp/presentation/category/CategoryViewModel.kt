@@ -2,19 +2,27 @@ package com.example.myfoodapp.presentation.category
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myfoodapp.common.screen.DishesScreen
 import com.example.myfoodapp.data.model.network.CategoriesDTO
+import com.example.myfoodapp.data.model.network.CategoryKitchenResponse
 import com.example.myfoodapp.data.repoimpl.RepositoryCategoryImpl
 import com.example.myfoodapp.domain.RepositoryCategory
+import com.github.terrakok.cicerone.Router
 
-class MainViewModel(
+class CategoryViewModel(
     private val liveData: MutableLiveData<AppState> = MutableLiveData(),
-    private val repositoryCategory: RepositoryCategory = RepositoryCategoryImpl()
+    private val repositoryCategory: RepositoryCategory = RepositoryCategoryImpl(),
+    private val router: Router
 ) : ViewModel() {
 
     fun getLiveData() = liveData
 
     fun getCategories() {
         repositoryCategory.getCategories(callback)
+    }
+
+    fun openDishesScreen(categoryKitchenResponse: CategoryKitchenResponse) {
+        router.navigateTo(DishesScreen(categoryKitchenResponse))
     }
 
     private val callback = object : Callback {

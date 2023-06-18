@@ -3,14 +3,17 @@ package com.example.myfoodapp.presentation.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myfoodapp.R
+import com.example.myfoodapp.core.MyApp
 import com.example.myfoodapp.databinding.ActivityMainBinding
 import com.example.myfoodapp.presentation.basket.FragmentBasket
 import com.example.myfoodapp.presentation.category.FragmentCategory
+import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val navigator = AppNavigator(this, R.id.fragmentContainerMain)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +27,16 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.fragmentContainerMain, FragmentCategory.newInstance()).commit()
         }
         init()
+    }
+
+    override fun onResumeFragments() {
+        super.onResumeFragments()
+        MyApp.appInstance.navigatorHolder.setNavigator(navigator)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        MyApp.appInstance.navigatorHolder.removeNavigator()
     }
 
     private fun disableUnusedMenus() {

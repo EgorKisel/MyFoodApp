@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import coil.load
-import com.example.myfoodapp.core.MyApp
 import com.example.myfoodapp.R
 import com.example.myfoodapp.common.KEY_DISH_BUNDLE
+import com.example.myfoodapp.core.MyApp
 import com.example.myfoodapp.data.model.network.DisheResponse
 import com.example.myfoodapp.data.model.room.CartItemDbEntity
 import com.example.myfoodapp.databinding.DialogFragmentProductBinding
