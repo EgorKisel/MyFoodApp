@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.myfoodapp.R
 import com.example.myfoodapp.common.KEY_BUNDLE_TITLE
 import com.example.myfoodapp.common.KEY_DISH_BUNDLE
