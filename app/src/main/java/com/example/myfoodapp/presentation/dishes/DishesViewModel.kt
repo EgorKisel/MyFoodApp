@@ -4,16 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myfoodapp.common.ALL_MENU
+import com.example.myfoodapp.common.screen.CategoryScreen
 import com.example.myfoodapp.data.model.network.DisheResponse
 import com.example.myfoodapp.data.model.network.DishesDTO
 import com.example.myfoodapp.data.repoimpl.RepositoryDishesImpl
 import com.example.myfoodapp.domain.RepositoryDishes
+import com.github.terrakok.cicerone.Router
 
 class DishesViewModel(
     private val liveData: MutableLiveData<DishesAppState> = MutableLiveData(),
     private val repository: RepositoryDishes = RepositoryDishesImpl(),
     private val dishesLiveData: MutableLiveData<List<DisheResponse>> = MutableLiveData(),
-    private val allDishes: MutableList<DisheResponse> = mutableListOf()
+    private val allDishes: MutableList<DisheResponse> = mutableListOf(),
+    private val router: Router
 ) : ViewModel() {
 
     fun getDishesLiveData(): LiveData<List<DisheResponse>> = dishesLiveData
@@ -31,6 +34,11 @@ class DishesViewModel(
                 liveData.postValue(DishesAppState.Error(Throwable()))
             }
         })
+    }
+
+    fun onBackPressed(): Boolean {
+        router.backTo(CategoryScreen)
+        return true
     }
 
     fun filterDishesByTag(tag: String) {

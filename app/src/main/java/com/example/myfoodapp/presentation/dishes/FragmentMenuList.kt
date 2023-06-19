@@ -3,25 +3,35 @@ package com.example.myfoodapp.presentation.dishes
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myfoodapp.R
 import com.example.myfoodapp.common.KEY_BUNDLE_TITLE
 import com.example.myfoodapp.common.KEY_DISH_BUNDLE
 import com.example.myfoodapp.common.makeToast
+import com.example.myfoodapp.core.MyApp
 import com.example.myfoodapp.data.model.network.DisheResponse
+import com.example.myfoodapp.data.repoimpl.RepositoryDishesImpl
 import com.example.myfoodapp.databinding.FragmentMenuListBinding
+import com.example.myfoodapp.presentation.BackPressedListener
 import com.example.myfoodapp.presentation.dishes.adapter.AdapterDishes
 import com.example.myfoodapp.presentation.dishes.adapter.OnDishesClickListener
 import com.example.myfoodapp.presentation.product.DialogFragmentProduct
+import com.github.terrakok.cicerone.Router
 import com.google.android.material.chip.Chip
 
-class FragmentMenuList : Fragment(R.layout.fragment_menu_list), OnDishesClickListener {
+class FragmentMenuList : Fragment(R.layout.fragment_menu_list), OnDishesClickListener,
+    BackPressedListener {
 
     private lateinit var binding: FragmentMenuListBinding
-    private val viewModel: DishesViewModel by lazy {
-        ViewModelProvider(this)[DishesViewModel::class.java]
-    }
+    private val viewModel: DishesViewModel = DishesViewModel(
+        MutableLiveData(),
+        RepositoryDishesImpl(),
+        MutableLiveData(),
+        mutableListOf(),
+        MyApp.appInstance.router
+    )
     private val adapter = AdapterDishes()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,6 +52,7 @@ class FragmentMenuList : Fragment(R.layout.fragment_menu_list), OnDishesClickLis
 
         val categoryName = arguments?.getString(KEY_BUNDLE_TITLE)
         binding.tvDishes.text = categoryName.toString()
+
         backToCategories()
         dishesFiltering()
     }
@@ -92,6 +103,11 @@ class FragmentMenuList : Fragment(R.layout.fragment_menu_list), OnDishesClickLis
         val dialogFragment = DialogFragmentProduct()
         dialogFragment.show(parentFragmentManager, PRODUCT_DIALOG_TAG)
         dialogFragment.arguments = args
+    }
+
+    override fun onBackPressed(): Boolean {
+        viewModel.onBackPressed()
+        return true
     }
 }
 

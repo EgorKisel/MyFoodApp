@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.myfoodapp.R
 import com.example.myfoodapp.core.MyApp
 import com.example.myfoodapp.databinding.ActivityMainBinding
+import com.example.myfoodapp.presentation.BackPressedListener
 import com.example.myfoodapp.presentation.basket.FragmentBasket
 import com.example.myfoodapp.presentation.category.FragmentCategory
+import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -14,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val navigator = AppNavigator(this, R.id.fragmentContainerMain)
+    private val viewModel = MainViewModel(Router())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +40,16 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         MyApp.appInstance.navigatorHolder.removeNavigator()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        supportFragmentManager.fragments.forEach {fragment ->
+            if (fragment is BackPressedListener && fragment.onBackPressed()) {
+                return
+            }
+        }
+        viewModel.onBackPressed()
     }
 
     private fun disableUnusedMenus() {
