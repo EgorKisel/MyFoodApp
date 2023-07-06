@@ -8,6 +8,8 @@ import com.example.myfoodapp.databinding.ActivityMainBinding
 import com.example.myfoodapp.presentation.BackPressedListener
 import com.example.myfoodapp.presentation.basket.FragmentBasket
 import com.example.myfoodapp.presentation.category.FragmentCategory
+import com.example.myfoodapp.test.Creation
+import com.example.myfoodapp.test.Operators
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -22,6 +24,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //Creation().exec()
+        Operators().exec()
 
         disableUnusedMenus()
 

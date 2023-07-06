@@ -17,7 +17,6 @@ import com.example.myfoodapp.presentation.BackPressedListener
 import com.example.myfoodapp.presentation.dishes.adapter.AdapterDishes
 import com.example.myfoodapp.presentation.dishes.adapter.OnDishesClickListener
 import com.example.myfoodapp.presentation.product.DialogFragmentProduct
-import com.github.terrakok.cicerone.Router
 import com.google.android.material.chip.Chip
 
 class FragmentMenuList : Fragment(R.layout.fragment_menu_list), OnDishesClickListener,
@@ -100,7 +99,7 @@ class FragmentMenuList : Fragment(R.layout.fragment_menu_list), OnDishesClickLis
             putParcelable(KEY_DISH_BUNDLE, dishes)
         }
         val dialogFragment = DialogFragmentProduct()
-        dialogFragment.show(parentFragmentManager, PRODUCT_DIALOG_TAG)
+        dialogFragment.show(childFragmentManager, PRODUCT_DIALOG_TAG)
         dialogFragment.arguments = args
     }
 
