@@ -17,18 +17,22 @@ import com.example.myfoodapp.presentation.BackPressedListener
 import com.example.myfoodapp.presentation.dishes.adapter.AdapterDishes
 import com.example.myfoodapp.presentation.dishes.adapter.OnDishesClickListener
 import com.example.myfoodapp.presentation.product.DialogFragmentProduct
+import com.github.terrakok.cicerone.Router
 import com.google.android.material.chip.Chip
+import javax.inject.Inject
 
 class FragmentMenuList : Fragment(R.layout.fragment_menu_list), OnDishesClickListener,
     BackPressedListener {
 
+    @Inject
+    lateinit var router: Router
     private lateinit var binding: FragmentMenuListBinding
     private val viewModel: DishesViewModel = DishesViewModel(
         MutableLiveData(),
         RepositoryDishesImpl(),
         MutableLiveData(),
         mutableListOf(),
-        MyApp.appInstance.router
+        router
     )
     private val adapter = AdapterDishes()
 

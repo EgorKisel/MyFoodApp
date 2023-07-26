@@ -12,8 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class BasketViewModel(
+class BasketViewModel @Inject constructor(
     private val basketRepo: BasketRepository = BasketRepositoryImpl(getBasketItems()),
     private val getPriceUseCase: GetPriceUseCase = GetPriceUseCase(basketRepo)
 ) : ViewModel() {

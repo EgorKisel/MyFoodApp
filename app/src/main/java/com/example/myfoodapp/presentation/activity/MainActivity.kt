@@ -8,11 +8,12 @@ import com.example.myfoodapp.databinding.ActivityMainBinding
 import com.example.myfoodapp.presentation.BackPressedListener
 import com.example.myfoodapp.presentation.basket.FragmentBasket
 import com.example.myfoodapp.presentation.category.FragmentCategory
-import com.example.myfoodapp.test.Creation
 import com.example.myfoodapp.test.Operators
+import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,8 +21,12 @@ class MainActivity : AppCompatActivity() {
     private val navigator = AppNavigator(this, R.id.fragmentContainerMain)
     private val viewModel = MainViewModel(Router())
 
+    @Inject
+    lateinit var navigatorHolder: NavigatorHolder
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        MyApp.appInstance.appComponent.inject(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -39,12 +44,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResumeFragments() {
         super.onResumeFragments()
-        MyApp.appInstance.navigatorHolder.setNavigator(navigator)
+        navigatorHolder.setNavigator(navigator)
     }
 
     override fun onPause() {
         super.onPause()
-        MyApp.appInstance.navigatorHolder.removeNavigator()
+        navigatorHolder.removeNavigator()
     }
 
     override fun onBackPressed() {

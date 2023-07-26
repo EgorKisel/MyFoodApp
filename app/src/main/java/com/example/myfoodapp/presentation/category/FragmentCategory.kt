@@ -15,14 +15,18 @@ import com.example.myfoodapp.data.repoimpl.RepositoryCategoryImpl
 import com.example.myfoodapp.databinding.FragmentMainBinding
 import com.example.myfoodapp.presentation.category.adapter.AdapterCategory
 import com.example.myfoodapp.presentation.category.adapter.OnItemClickListener
+import com.github.terrakok.cicerone.Router
+import javax.inject.Inject
 
 class FragmentCategory : Fragment(R.layout.fragment_main), OnItemClickListener {
 
+    @Inject
+    lateinit var router: Router
     private var _binding: FragmentMainBinding? = null
     private val binding: FragmentMainBinding get() = _binding!!
     private val viewModel: CategoryViewModel = CategoryViewModel(
         MutableLiveData(),
-        RepositoryCategoryImpl(), MyApp.appInstance.router
+        RepositoryCategoryImpl(), router
     )
     private val adapter = AdapterCategory()
 

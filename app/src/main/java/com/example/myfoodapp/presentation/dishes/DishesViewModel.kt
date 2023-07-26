@@ -10,8 +10,9 @@ import com.example.myfoodapp.data.model.network.DishesDTO
 import com.example.myfoodapp.data.repoimpl.RepositoryDishesImpl
 import com.example.myfoodapp.domain.RepositoryDishes
 import com.github.terrakok.cicerone.Router
+import javax.inject.Inject
 
-class DishesViewModel(
+class DishesViewModel @Inject constructor(
     private val liveData: MutableLiveData<DishesAppState> = MutableLiveData(),
     private val repository: RepositoryDishes = RepositoryDishesImpl(),
     private val dishesLiveData: MutableLiveData<List<DisheResponse>> = MutableLiveData(),

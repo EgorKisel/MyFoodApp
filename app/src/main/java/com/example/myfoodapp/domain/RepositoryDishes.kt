@@ -1,7 +1,8 @@
 package com.example.myfoodapp.domain
 
-import com.example.myfoodapp.presentation.dishes.DishesViewModel
+import com.example.myfoodapp.data.model.network.DishesDTO
+import io.reactivex.rxjava3.core.Single
 
 interface RepositoryDishes {
-    fun getDishes(callback: DishesViewModel.Callback)
+    fun getDishes(): Single<List<DishesDTO>>
 }

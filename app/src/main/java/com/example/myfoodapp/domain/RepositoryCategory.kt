@@ -1,7 +1,8 @@
 package com.example.myfoodapp.domain
 
-import com.example.myfoodapp.presentation.category.CategoryViewModel
+import com.example.myfoodapp.data.model.network.CategoriesDTO
+import io.reactivex.rxjava3.core.Single
 
 interface RepositoryCategory {
-    fun getCategories(callback: CategoryViewModel.Callback)
+    fun getCategories():Single<List<CategoriesDTO>>
 }

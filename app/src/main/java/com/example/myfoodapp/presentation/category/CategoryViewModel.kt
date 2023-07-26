@@ -8,17 +8,18 @@ import com.example.myfoodapp.data.model.network.CategoryKitchenResponse
 import com.example.myfoodapp.data.repoimpl.RepositoryCategoryImpl
 import com.example.myfoodapp.domain.RepositoryCategory
 import com.github.terrakok.cicerone.Router
+import javax.inject.Inject
 
-class CategoryViewModel(
+class CategoryViewModel @Inject constructor(
     private val liveData: MutableLiveData<AppState> = MutableLiveData(),
-    private val repositoryCategory: RepositoryCategory = RepositoryCategoryImpl(),
+    private val repositoryCategory: RepositoryCategory,
     private val router: Router
 ) : ViewModel() {
 
     fun getLiveData() = liveData
 
     fun getCategories() {
-        repositoryCategory.getCategories(callback)
+        repositoryCategory.getCategories()
     }
 
     fun openDishesScreen(categoryKitchenResponse: CategoryKitchenResponse) {
