@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myfoodapp.R
 import com.example.myfoodapp.core.MyApp
+import com.example.myfoodapp.data.service.DishesApi
 import com.example.myfoodapp.databinding.ActivityMainBinding
 import com.example.myfoodapp.presentation.BackPressedListener
 import com.example.myfoodapp.presentation.basket.FragmentBasket
@@ -13,6 +14,7 @@ import com.example.myfoodapp.test.Operators
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,8 +22,14 @@ class MainActivity : AppCompatActivity() {
     private val navigator = AppNavigator(this, R.id.fragmentContainerMain)
     private val viewModel = MainViewModel(Router())
 
+    @Inject
+    lateinit var api: DishesApi
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        MyApp.appInstance.appComponent.inject(this)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -35,6 +43,8 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.fragmentContainerMain, FragmentCategory.newInstance()).commit()
         }
         init()
+
+        api.getDishes()
     }
 
     override fun onResumeFragments() {
