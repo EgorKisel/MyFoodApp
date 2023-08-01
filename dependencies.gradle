@@ -1,0 +1,40 @@
+ext.versions = [
+        navigation: '2.6.0',
+        coil      : '2.3.0',
+        retrofit  : '2.9.0',
+        room      : '2.4.3',
+        dagger    : '2.38.1'
+]
+
+ext.libs = [
+        coreKtx              : "androidx.core:core-ktx:1.10.1",
+        appcompat            : "androidx.appcompat:appcompat:1.6.1",
+        material             : "com.google.android.material:material:1.5.0",
+        constraintLayout     : "androidx.constraintlayout:constraintlayout:2.1.4",
+
+        navigationFragment   : "androidx.navigation:navigation-fragment-ktx:$versions.navigation",
+        navigationUiKtx      : "androidx.navigation:navigation-ui-ktx:$versions.navigation",
+
+        gson                 : "com.google.code.gson:gson:2.10.1",
+        coil                 : "io.coil-kt:coil:$versions.coil",
+        coilSvg              : "io.coil-kt:coil-svg:$versions.coil",
+
+        retrofit             : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+        retrofitConverterGson: "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+
+        roomRuntime          : "androidx.room:room-runtime:$versions.room",
+        roomRxJava           : "androidx.room:room-rxjava3:$versions.room",
+        roomKtx              : "androidx.room:room-ktx:$versions.room",
+        roomCompiler         : "androidx.room:room-compiler:$versions.room",
+
+        coroutines           : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4",
+        lifecycleViewmodel   : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0",
+
+        dagger               : "com.google.dagger:dagger:$versions.dagger",
+        daggerCompiler       : "com.google.dagger:dagger-compiler:2.38.1",
+
+        cicerone             : "com.github.terrakok:cicerone:7.1",
+
+        rxandroid            : "io.reactivex.rxjava3:rxandroid:3.0.0",
+        rxjava               : "io.reactivex.rxjava3:rxjava:3.0.13"
+]
