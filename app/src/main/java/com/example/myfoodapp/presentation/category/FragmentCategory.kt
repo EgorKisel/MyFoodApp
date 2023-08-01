@@ -13,13 +13,13 @@ import com.example.myfoodapp.core.MyApp
 import com.example.myfoodapp.data.model.network.CategoryKitchenResponse
 import com.example.myfoodapp.data.repoimpl.RepositoryCategoryImpl
 import com.example.myfoodapp.databinding.FragmentMainBinding
+import com.example.myfoodapp.presentation.base.viewBinding
 import com.example.myfoodapp.presentation.category.adapter.AdapterCategory
 import com.example.myfoodapp.presentation.category.adapter.OnItemClickListener
 
 class FragmentCategory : Fragment(R.layout.fragment_main), OnItemClickListener {
 
-    private var _binding: FragmentMainBinding? = null
-    private val binding: FragmentMainBinding get() = _binding!!
+    private val binding by viewBinding { FragmentMainBinding.bind(it) }
     private val viewModel: CategoryViewModel = CategoryViewModel(
         MutableLiveData(),
         RepositoryCategoryImpl(), MyApp.appInstance.router
@@ -28,7 +28,6 @@ class FragmentCategory : Fragment(R.layout.fragment_main), OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentMainBinding.bind(view)
         val observer = Observer<CategoryViewModel.AppState> { renderData(it) }
         binding.recyclerMain.adapter = adapter
         adapter.mSetOnClickListener(this)
@@ -47,11 +46,6 @@ class FragmentCategory : Fragment(R.layout.fragment_main), OnItemClickListener {
                 adapter.setData(state.categoryDTO.categories)
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 
     companion object {

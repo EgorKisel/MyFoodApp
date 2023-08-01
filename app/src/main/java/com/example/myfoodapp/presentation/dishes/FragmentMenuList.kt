@@ -14,6 +14,7 @@ import com.example.myfoodapp.data.model.network.DisheResponse
 import com.example.myfoodapp.data.repoimpl.RepositoryDishesImpl
 import com.example.myfoodapp.databinding.FragmentMenuListBinding
 import com.example.myfoodapp.presentation.BackPressedListener
+import com.example.myfoodapp.presentation.base.viewBinding
 import com.example.myfoodapp.presentation.dishes.adapter.AdapterDishes
 import com.example.myfoodapp.presentation.dishes.adapter.OnDishesClickListener
 import com.example.myfoodapp.presentation.product.DialogFragmentProduct
@@ -22,7 +23,7 @@ import com.google.android.material.chip.Chip
 class FragmentMenuList : Fragment(R.layout.fragment_menu_list), OnDishesClickListener,
     BackPressedListener {
 
-    private lateinit var binding: FragmentMenuListBinding
+    private val binding by viewBinding { FragmentMenuListBinding.bind(it) }
     private val viewModel: DishesViewModel = DishesViewModel(
         MutableLiveData(),
         RepositoryDishesImpl(),
@@ -34,7 +35,6 @@ class FragmentMenuList : Fragment(R.layout.fragment_menu_list), OnDishesClickLis
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMenuListBinding.bind(view)
         val observer = Observer<DishesViewModel.DishesAppState> { renderData(it) }
         val dishesObserver = Observer<List<DisheResponse>> { dishes ->
             adapter.setData(dishes)

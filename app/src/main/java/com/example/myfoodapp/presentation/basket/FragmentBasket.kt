@@ -9,13 +9,14 @@ import com.example.myfoodapp.R
 import com.example.myfoodapp.common.makeToast
 import com.example.myfoodapp.data.model.room.CartItemDbEntity
 import com.example.myfoodapp.databinding.FragmentBasketBinding
+import com.example.myfoodapp.presentation.base.viewBinding
 import com.example.myfoodapp.presentation.basket.adapter.AdapterBasket
 import com.example.myfoodapp.presentation.basket.adapter.OnItemClickListener
 
 class FragmentBasket : Fragment(R.layout.fragment_basket), OnItemClickListener {
 
-    private var _binding: FragmentBasketBinding? = null
-    private val binding: FragmentBasketBinding get() = _binding!!
+    private val binding by viewBinding { FragmentBasketBinding.bind(it) }
+
     private val adapter = AdapterBasket()
     private val viewModel: BasketViewModel by lazy {
         ViewModelProvider(this)[BasketViewModel::class.java]
@@ -23,7 +24,6 @@ class FragmentBasket : Fragment(R.layout.fragment_basket), OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentBasketBinding.bind(view)
         binding.recyclerMain.adapter = adapter
         adapter.mSetOnClickListener(this)
         viewModel.getLiveData().observe(viewLifecycleOwner, Observer { renderData(it) })
@@ -35,6 +35,7 @@ class FragmentBasket : Fragment(R.layout.fragment_basket), OnItemClickListener {
             is BasketViewModel.AppState.Error -> {
                 makeToast(R.string.something_went_wrong)
             }
+
             BasketViewModel.AppState.Loading -> {}
             is BasketViewModel.AppState.Success -> {
                 val basketItems = appState.basket
@@ -55,11 +56,6 @@ class FragmentBasket : Fragment(R.layout.fragment_basket), OnItemClickListener {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
     companion object {
         @JvmStatic
         fun newInstance() = FragmentBasket()
@@ -73,6 +69,6 @@ class FragmentBasket : Fragment(R.layout.fragment_basket), OnItemClickListener {
     override fun onRemoveFromBasket(cartItem: CartItemDbEntity) {
         if (cartItem.quantity > 1) {
             viewModel.updateCartItemQuantity(cartItem.id, --cartItem.quantity)
-        } else  viewModel.deleteItemById(cartItem.id)
+        } else viewModel.deleteItemById(cartItem.id)
     }
 }

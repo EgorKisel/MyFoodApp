@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DialogFragmentProduct : DialogFragment() {
+
     private var _binding: DialogFragmentProductBinding? = null
     private val binding get() = _binding!!
 
