@@ -77,4 +77,7 @@ dependencies {
     //rxJava
     implementation libs.rxandroid
     implementation libs.rxjava
+    // AdapterDelegates
+    implementation libs.adapterDelegates
+    implementation libs.adapterDelegatesViewBinding
 }
