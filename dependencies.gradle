@@ -22,13 +22,14 @@ ext.libs = [
 
         retrofit                   : "com.squareup.retrofit2:retrofit:$versions.retrofit",
         retrofitConverterGson      : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+        okHttpLoggingInterceptor   : "com.squareup.okhttp3:logging-interceptor:4.9.3",
 
         roomRuntime                : "androidx.room:room-runtime:$versions.room",
         roomRxJava                 : "androidx.room:room-rxjava3:$versions.room",
         roomKtx                    : "androidx.room:room-ktx:$versions.room",
         roomCompiler               : "androidx.room:room-compiler:$versions.room",
 
-        coroutines                 : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4",
+        coroutines                 : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3",
         lifecycleViewmodel         : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0",
 
         dagger                     : "com.google.dagger:dagger:$versions.dagger",

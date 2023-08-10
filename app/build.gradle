@@ -80,4 +80,6 @@ dependencies {
     // AdapterDelegates
     implementation libs.adapterDelegates
     implementation libs.adapterDelegatesViewBinding
+
+    implementation project(':core-network')
 }

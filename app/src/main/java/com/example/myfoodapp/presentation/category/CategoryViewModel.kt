@@ -21,6 +21,8 @@ class CategoryViewModel(
         repositoryCategory.getCategories(callback)
     }
 
+    private val api = repositoryCategory
+
     fun openDishesScreen(categoryKitchenResponse: CategoryKitchenResponse) {
         router.navigateTo(DishesScreen(categoryKitchenResponse))
     }
